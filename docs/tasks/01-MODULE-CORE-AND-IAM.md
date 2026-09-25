@@ -13,9 +13,13 @@
   - [x] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `company_type: PLATFORM_HOST/CLIENT_TENANT`, `business_type`, `currency`, `is_active`)
   - [x] `users` টেবিলে `company_id` (UUID v7 Tenant FK) এবং `is_platform_admin` ফিল্ড মাইগ্রেশন
   - [x] `App\Domain\Organization\Models\Company` এবং `App\Models\User` টেন্যান্ট রিলেশনশিপ (`company()`, `users()`)
-  - [x] `TenantUserRelationshipTest` ইউনিট টেস্ট (100% Passed)
-- [ ] **1.3 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
-  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* আমাদের ডাটাবেজে `users` এবং `companies` টেবিল তৈরি হয়ে গেছে। এখন ইউজারদের সুরক্ষিতভাবে লগইন করাতে এবং কোম্পানিভেদে সুনির্দিষ্ট রোল (যেমন: Factory Admin, Merchandiser, Cutting Master, QC Inspector) প্রদান করতে মাল্টি-টেন্যান্ট পারমিশন গার্ড সক্রিয় করা আবশ্যকীয় পরবর্তী ধাপ।
+- [x] **1.3 সেন্ট্রাল টেন্যান্টস স্কিমা ও কন্ট্রোল প্লেইন (Central Tenants - ADR-13, MOD-01-APPLIANCE)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* TraceFlow-Platform একটি মাল্টি-টেন্যান্ট SaaS ও Appliance প্ল্যাটফর্ম। সেন্ট্রাল হোস্ট ডাটাবেজে প্রতিটি ক্লায়েন্টের ডেডিকেটেড ডাটাবেজ ইনফো (`db_name`, `db_host`, `db_user`, `db_password`), সাবডোমেন (`{slug}.traceflow.app`), কাস্টম ডোমেন এবং ডেপ্লয়মেন্ট টাইপ (`CLOUD_SAAS` বনাম `ON_PREMISES_APPLIANCE`) সংরক্ষিত থাকতে হবে, যা ক্লায়েন্ট অনবোর্ডিং ও ডাইনামিক ডিবি রাউটিংয়ের মূল ভিত্তি।
+  - [x] `tenants` টেবিল মাইগ্রেশন (`id` UUID v7, `client_name`, `client_slug`, `subdomain`, `custom_domain`, `deployment_type`, `db_host`, `db_port`, `db_name`, `db_username`, `db_password`, `server_ip`, `hardware_fingerprint`, `is_active`)
+  - [x] `App\Domain\Tenant\Models\Tenant` মডেল তৈরি ও ফিল্ড এনক্রিপশন
+  - [x] `TenantProvisioningTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
+- [ ] **1.4 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ডাটাবেজে ইউজার এবং কোম্পানি স্ট্রাকচার প্রস্তুত হওয়ার পর কোম্পানিভেদে সুনির্দিষ্ট রোল ও পারমিশন প্রয়োগের জন্য Spatie RBAC কনফিগার করা আবশ্যক।
   - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল
   - [ ] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
   - [ ] Spatie পারমিশন টেবিলসমূহ UUID v7 ফরম্যাটে মাইগ্রেট করা
