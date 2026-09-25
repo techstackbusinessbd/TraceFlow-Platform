@@ -75,11 +75,13 @@
   - [x] `frontend/src/shared/stores/authStore.ts` তৈরি (টোকেন, ইউজার, কোম্পানি ও ডুয়াল ড্যাশবোর্ড টার্গেট পারসিস্টেন্স)
   - [x] `frontend/src/shared/api/client.ts` এপিআই ক্লায়েন্ট তৈরি (অটো Bearer টোকেন ইনজেকশন ও 401 সেশন এক্সপায়ার ইন্টারসেপ্টর সহ)
   - [x] TypeScript Strict Build ও Oxlint ভেরিফিকেশন (0 errors, 0 warnings)
-- [ ] **3.3 স্ক্রিন ও ড্যাশবোর্ড পেজসমূহ**
-  - [ ] এন্টারপ্রাইজ লগইন স্ক্রিন (Eye-Comfort ও রিমেম্বার মি সহ)
-  - [ ] ডুয়াল ড্যাশবোর্ড সুইচিং ভিউ (Superadmin Panel vs Factory Floor Hub)
-  - [ ] কোম্পানি ও ইউনিট ডিরেক্টরি পেজ (TanStack Table v8 ভার্চুয়ালাইজড গ্রিড)
-  - [ ] স্লাইড-ওভার ড্রয়ার ফর্ম (অটো-কোড প্রিভিউ সহ)
+- [x] **3.3 স্ক্রিন ও ড্যাশবোর্ড পেজসমূহ (SRS_LOGIN, ADR-12, ADR-16)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ব্যাকএন্ড লগইন এপিআই ও ডুয়াল ড্যাশবোর্ড ডিসিশন আর্কিটেকচারের সাথে ব্যবহারকারী ও টিমের প্রবেশের দৃশ্যমান ফ্রন্টএন্ড ইন্টারফেস।
+  - [x] এন্টারপ্রাইজ লগইন স্ক্রিন (`LoginPage.tsx`: Email/Username input, Show/Hide Password, Remember Me, ISO Compliance Footer)
+  - [x] কুইক ডেমো অ্যাকাউন্ট ফিল গ্রিড (Superadmin, Backend Squad)
+  - [x] ডুয়াল ড্যাশবোর্ড শেল ভিউ (`DashboardShell.tsx`: Platform Host Command Center vs Factory Client Hub, Active Tenant context display, Sign Out action)
+  - [x] সেশন অটো-ভেরিফিকেশন ও রিডাইরেকশন (`App.tsx` on mount verify with `/api/v1/auth/me`)
+  - [x] TypeScript Strict Build ও Oxlint ভেরিফিকেশন (0 errors, 0 warnings)
 
 ---
 
