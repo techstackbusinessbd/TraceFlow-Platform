@@ -67,4 +67,14 @@ class Tenant extends Model
         'is_active' => 'boolean',
         'db_port' => 'integer',
     ];
+
+    /**
+     * Get the manufacturing companies operating under this tenant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Domain\Organization\Models\Company, $this>
+     */
+    public function companies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Domain\Organization\Models\Company::class, 'tenant_id');
+    }
 }

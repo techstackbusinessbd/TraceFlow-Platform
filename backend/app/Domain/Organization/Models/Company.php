@@ -33,6 +33,7 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'tenant_id',
         'company_name',
         'company_code',
         'company_type',
@@ -49,6 +50,16 @@ class Company extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Get the parent tenant control plane record if this company belongs to a client tenant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Domain\Tenant\Models\Tenant, $this>
+     */
+    public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Domain\Tenant\Models\Tenant::class, 'tenant_id');
+    }
 
     /**
      * Get the users that belong to this company/tenant.

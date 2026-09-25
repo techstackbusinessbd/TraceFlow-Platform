@@ -60,4 +60,54 @@ class TenantUserRelationshipTest extends TestCase
         $this->assertNull($superadmin->company);
         $this->assertTrue($superadmin->is_platform_admin);
     }
+
+    /**
+     * Test that user supports username for login (SRS_LOGIN Section 2.3).
+     */
+    public function test_user_supports_username(): void
+    {
+        $user = User::create([
+            'name' => 'TraceFlow Admin',
+            'username' => 'tfadmin',
+            'email' => 'admin@traceflow.internal',
+            'password' => 'secret123',
+            'is_platform_admin' => true,
+        ]);
+
+        $this->assertEquals('tfadmin', $user->username);
+        $this->assertDatabaseHas('users', [
+            'username' => 'tfadmin',
+            'email' => 'admin@traceflow.internal',
+        ]);
+    }
+
+    /**
+     * Test that company can belong to a parent tenant control plane record.
+     */
+    public function test_company_belongs_to_tenant(): void
+    {
+        $tenant = \App\Domain\Tenant\Models\Tenant::create([
+            'client_name' => 'Apex Holdings Group',
+            'client_slug' => 'apex-holdings',
+            'subdomain' => 'apex',
+            'deployment_type' => 'CLOUD_SAAS',
+            'db_name' => 'traceflow_client_apex',
+            'db_username' => 'tf_apex',
+            'db_password' => 'secret_pass_123',
+        ]);
+
+        $company = Company::create([
+            'tenant_id' => $tenant->id,
+            'company_name' => 'Apex Spinning Mills Ltd.',
+            'company_code' => 'ASML-001',
+            'company_type' => 'CLIENT_TENANT',
+            'business_type' => 'Spinning',
+            'currency' => 'BDT',
+            'is_active' => true,
+        ]);
+
+        $this->assertEquals($tenant->id, $company->tenant->id);
+        $this->assertCount(1, $tenant->companies);
+        $this->assertEquals('ASML-001', $tenant->companies->first()->company_code);
+    }
 }

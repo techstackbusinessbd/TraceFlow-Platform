@@ -18,6 +18,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table): void {
             $table->uuid('id')->primary();
+            $table->foreignUuid('tenant_id')->nullable()->constrained('tenants')->nullOnDelete();
             $table->string('company_name', 150);
             $table->string('company_code', 50)->unique();
             $table->string('company_type', 50)->default('CLIENT_TENANT'); // PLATFORM_HOST, CLIENT_TENANT
