@@ -13,7 +13,8 @@
   - [x] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `business_type`, `currency`, `is_active`)
   - [x] `App\Domain\Organization\Models\Company` মডেল তৈরি ও রিলেশনশিপ
   - [x] `CompanyTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
-- [ ] **1.3 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড)**
+- [ ] **1.3 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* আমাদের ডাটাবেজে `users` এবং `companies` টেবিল তৈরি হয়ে গেছে। এখন ইউজারদের সুরক্ষিতভাবে লগইন করাতে এবং কোম্পানিভেদে সুনির্দিষ্ট রোল (যেমন: Factory Admin, Merchandiser, Cutting Master, QC Inspector) প্রদান করতে মাল্টি-টেন্যান্ট পারমিশন গার্ড সক্রিয় করা আবশ্যকীয় পরবর্তী ধাপ।
   - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল
   - [ ] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
   - [ ] Spatie পারমিশন টেবিলসমূহ UUID v7 ফরম্যাটে মাইগ্রেট করা
