@@ -30,7 +30,8 @@ Before generating or refactoring code:
 4. **Autonomous Self-Updating Protocol:**
    - Any architectural decision, schema modification, or user specification MUST immediately and automatically trigger updates across `docs/`, `AGENTS.md`, and all related `.agents/skills/*/SKILL.md` files without requiring user prompts or reminders.
 5. **Proactive Next-Task Recommendation Protocol:**
-   - Upon completing any feature, bug-fix, or architectural task, the agent MUST proactively analyze the project roadmap and present the recommended next logical task with clear options and rationale without waiting for the user to ask.
+   - Upon completing any feature, bug-fix, or architectural task, the agent MUST proactively analyze the project roadmap and present the recommended next logical task.
+   - **বাধ্যতামূলক বিবরণ ও যৌক্তিকতা:** পরবর্তী টাস্ক রেকমেন্ড করার সময় অবশ্যই "কেন এটি রেকমেন্ড করা হলো" তার স্পষ্ট সংক্ষিপ্ত কারণ (Short Summary / Rationale) এবং এর পূর্বশর্ত ও ব্যবসায়িক গুরুত্ব বিস্তারিত তুলে ধরতে হবে। কোনো অন্ধ বা কারণ ছাড়া টাস্ক রেকমেন্ড করা যাবে না।
 6. **Mandatory SRS Gate (Zero Code Before SRS):**
    - Check if an authoritative, enterprise-grade `SRS.md` and `SOP.md` exist under `docs/modules/<module-name>/`. If absent, draft and finalize them first before writing any code. Writing implementation code without an approved SRS is strictly prohibited.
 7. **Pre-Migration Column Approval Gate:**
