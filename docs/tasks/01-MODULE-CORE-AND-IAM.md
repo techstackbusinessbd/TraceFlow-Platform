@@ -8,11 +8,12 @@
 - [x] **1.1 UUID v7 বেস আর্কিটেকচার (Invariant-01)**
   - [x] `App\Shared\Traits\HasUuidV7` ট্রেইট তৈরি
   - [x] ডিফল্ট `users` ও `sessions` টেবিলে UUID v7 মাইগ্রেশন
-- [x] **1.2 কোম্পানি টেবিল ও মডেল (Tenant Base)**
-  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* এটি মাল্টি-টেন্যান্সি এবং আরএমজি ইআরপির কোর রুট। সিস্টেমে ইউজারদের নির্দিষ্ট কোম্পানির অধীনে রোল ও পারমিশন দিতে হলে ডাটাবেজে সবার আগে একটি ভ্যালিড `companies` টেবিল থাকা কারিগরি পূর্বশর্ত।
-  - [x] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `business_type`, `currency`, `is_active`)
-  - [x] `App\Domain\Organization\Models\Company` মডেল তৈরি ও রিলেশনশিপ
-  - [x] `CompanyTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
+- [x] **1.2 কোম্পানি ও মাল্টি-টেন্যান্ট স্কিমা (Tenant Base - ADR-11, ADR-13)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* এটি মাল্টি-টেন্যান্সি এবং আরএমজি ইআরপির কোর রুট। সিস্টেমে ইউজারদের নির্দিষ্ট কোম্পানির অধীনে রোল ও পারমিশন দিতে হলে ডাটাবেজে সবার আগে একটি ভ্যালিড `companies` টেবিল এবং ইউজার টেবিলে `company_id` ফরেন কি থাকা কারিগরি পূর্বশর্ত।
+  - [x] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `company_type: PLATFORM_HOST/CLIENT_TENANT`, `business_type`, `currency`, `is_active`)
+  - [x] `users` টেবিলে `company_id` (UUID v7 Tenant FK) এবং `is_platform_admin` ফিল্ড মাইগ্রেশন
+  - [x] `App\Domain\Organization\Models\Company` এবং `App\Models\User` টেন্যান্ট রিলেশনশিপ (`company()`, `users()`)
+  - [x] `TenantUserRelationshipTest` ইউনিট টেস্ট (100% Passed)
 - [ ] **1.3 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* আমাদের ডাটাবেজে `users` এবং `companies` টেবিল তৈরি হয়ে গেছে। এখন ইউজারদের সুরক্ষিতভাবে লগইন করাতে এবং কোম্পানিভেদে সুনির্দিষ্ট রোল (যেমন: Factory Admin, Merchandiser, Cutting Master, QC Inspector) প্রদান করতে মাল্টি-টেন্যান্ট পারমিশন গার্ড সক্রিয় করা আবশ্যকীয় পরবর্তী ধাপ।
   - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল

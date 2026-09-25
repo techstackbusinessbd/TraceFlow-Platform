@@ -35,6 +35,7 @@ class Company extends Model
     protected $fillable = [
         'company_name',
         'company_code',
+        'company_type',
         'business_type',
         'currency',
         'is_active',
@@ -48,4 +49,14 @@ class Company extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Get the users that belong to this company/tenant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\User, $this>
+     */
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\User::class, 'company_id');
+    }
 }

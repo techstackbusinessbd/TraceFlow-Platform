@@ -20,6 +20,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('company_name', 150);
             $table->string('company_code', 50)->unique();
+            $table->string('company_type', 50)->default('CLIENT_TENANT'); // PLATFORM_HOST, CLIENT_TENANT
             $table->string('business_type', 50)->default('Woven');
             $table->string('currency', 10)->default('USD');
             $table->boolean('is_active')->default(true);
