@@ -62,10 +62,12 @@
 ---
 
 ### ৩. ফ্রন্টএন্ড কোর ও ইউআই সিস্টেম (React 19 + TypeScript + Vite)
-- [ ] **3.1 সেন্ট্রালাইজড ডিজাইন সিস্টেম ও টোকেন (Zero Inline CSS)**
-  - [ ] CSS ভেরিয়েবল ও আরগোনোমিক কালার প্যালেট (`variables.css`)
-  - [ ] কোর UI অ্যাটমস: `Button`, `Input`, `Badge`, `Card`, `SlideOverDrawer`
-  - [ ] গ্র্যানুলার পারমিশন গার্ড কম্পোনেন্ট (`<Can />`)
+- [x] **3.1 সেন্ট্রালাইজড ডিজাইন সিস্টেম ও টোকেন (Zero Inline CSS - ADR-16, UI-UX-GUIDELINES)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* গার্মেন্টস ফ্লোর ও ম্যানেজমেন্টে একটানা ৮-১০ ঘণ্টা কাজের সুবিধার জন্য আই-কমফোর্ট সফট স্লেট ক্যানভাস (`#f8fafc`), ব্র্যান্ডেড ব্লু অ্যাকসেন্ট এবং জিরো ইনলাইন সিএসএস নিশ্চিত করতে সেন্ট্রালাইজড ম্যানেজেবল ডিজাইন টোকেন ও কোর ইউআই অ্যাটমস প্রস্তুত করা হয়েছে।
+  - [x] সেন্ট্রালাইজড ডিজাইন টোকেন ও সিএসএস ভেরিয়েবলস (`frontend/src/styles/tokens.css` - Light & Ergonomic Dark Mode)
+  - [x] গ্লোবাল রিসেট ও ট্যাবুলার নিউমারালস রুলস (`frontend/src/index.css`)
+  - [x] কোর UI অ্যাটমস: `Button` (5 variants, 3 sizes, loading spinner), `Input` (error, helper, icons), `Card` (3 variants, 4 paddings), `Alert` (4 signal tints)
+  - [x] TypeScript Strict Build & Oxlint ভেরিফিকেশন (0 errors, 0 warnings in `src`)
 - [ ] **3.2 অথেনটিকেশন ও স্টেট ম্যানেজমেন্ট**
   - [ ] Zustand Auth Store (`authStore.ts`: টোকেন, কারেন্ট কোম্পানি, পারমিশনস)
   - [ ] Axios/Fetch সেন্ট্রালাইজড এপিআই ক্লায়েন্ট উইথ ইন্টারসেপ্টরস

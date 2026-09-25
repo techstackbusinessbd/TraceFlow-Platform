@@ -1,0 +1,126 @@
+/**
+ * TraceFlow-Platform Centralized Design Tokens (ADR-16, UI-UX-GUIDELINES)
+ *
+ * Single Source of Truth for all Colors, Dimensions, Typography, Shadows, and Transitions.
+ * Zero Inline CSS Policy: All UI components must consume these variables.
+ */
+
+:root {
+  /* -------------------------------------------------------------
+     1. Surface, Canvas & Borders (Anti-Fatigue Eye-Comfort)
+     ------------------------------------------------------------- */
+  --bg-app: #f8fafc;                /* Soft Slate Canvas - eliminates screen glare */
+  --bg-surface: #ffffff;            /* Pure Surface Card / Modal */
+  --bg-surface-subtle: #f1f5f9;     /* Secondary / Muted Container */
+  --bg-surface-hover: #e2e8f0;      /* Interactive hover background */
+  
+  --border-subtle: #e2e8f0;         /* Slate-200 Soft Container Divider */
+  --border-default: #cbd5e1;        /* Slate-300 Standard Input Border */
+  --border-strong: #94a3b8;         /* Slate-400 Focused / Active Border */
+  --border-focus: #2563eb;          /* Blue-600 Focus Ring Indicator */
+
+  /* -------------------------------------------------------------
+     2. Typography & Text Hierarchy (No harsh #000000)
+     ------------------------------------------------------------- */
+  --text-primary: #0f172a;          /* Slate-900 Deep Slate Navy */
+  --text-secondary: #334155;        /* Slate-700 Secondary Body */
+  --text-muted: #64748b;            /* Slate-500 Labels & Placeholders */
+  --text-disabled: #94a3b8;         /* Slate-400 Disabled State */
+  --text-inverse: #ffffff;          /* White text on dark accents */
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+
+  /* -------------------------------------------------------------
+     3. Brand & Functional Colors
+     ------------------------------------------------------------- */
+  --brand-primary: #0f172a;         /* Deep Slate Navy (Platform Theme) */
+  --brand-accent: #2563eb;          /* Blue-600 Vibrant Enterprise Cobalt */
+  --brand-accent-hover: #1d4ed8;    /* Blue-700 Active / Pressed State */
+  --brand-accent-subtle: #eff6ff;   /* Blue-50 Gentle Accent Background */
+
+  /* Industrial Semantic Badges & Signals (Muted Tints - ADR-16) */
+  --signal-success-bg: #ecfdf5;     /* Emerald-50 */
+  --signal-success-text: #065f46;   /* Emerald-800 */
+  --signal-success-border: #a7f3d0; /* Emerald-200 */
+
+  --signal-warning-bg: #fffbeb;     /* Amber-50 */
+  --signal-warning-text: #92400e;   /* Amber-800 */
+  --signal-warning-border: #fde68a; /* Amber-200 */
+
+  --signal-danger-bg: #fef2f2;      /* Rose-50 */
+  --signal-danger-text: #991b1b;    /* Rose-800 */
+  --signal-danger-border: #fecdd3;  /* Rose-200 */
+
+  --signal-info-bg: #f0f9ff;        /* Sky-50 */
+  --signal-info-text: #075985;      /* Sky-800 */
+  --signal-info-border: #bae6fd;    /* Sky-200 */
+
+  /* -------------------------------------------------------------
+     4. Geometry, Height & Radii (Universal Component Standard)
+     ------------------------------------------------------------- */
+  --height-sm: 32px;                /* Compact tags / buttons */
+  --height-default: 40px;           /* Universal form input & button height */
+  --height-lg: 48px;                /* Touchscreen / Floor terminal standard */
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;                 /* Buttons, Inputs & Dropdowns */
+  --radius-md: 10px;                /* Inner cards & drawers */
+  --radius-lg: 16px;                /* Outer container cards */
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* -------------------------------------------------------------
+     5. Shadows, Elevation & Transitions
+     ------------------------------------------------------------- */
+  --shadow-subtle: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-drawer: -10px 0 30px -5px rgba(15, 23, 42, 0.15);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.2);
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------
+   Ergonomic Dark / Shift Mode (ADR-16 Decision 04)
+   Activated via <html data-theme="dark">
+   ------------------------------------------------------------- */
+[data-theme="dark"] {
+  --bg-app: #0b0f19;                /* Deep Charcoal Canvas */
+  --bg-surface: #1e293b;            /* Slate-800 Dark Surface */
+  --bg-surface-subtle: #0f172a;     /* Slate-900 Deeper Container */
+  --bg-surface-hover: #334155;      /* Slate-700 Interactive Hover */
+
+  --border-subtle: #334155;
+  --border-default: #475569;
+  --border-strong: #64748b;
+  --border-focus: #3b82f6;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-disabled: #64748b;
+
+  --brand-accent: #3b82f6;
+  --brand-accent-hover: #60a5fa;
+  --brand-accent-subtle: rgba(59, 130, 246, 0.15);
+
+  --signal-success-bg: rgba(6, 95, 70, 0.25);
+  --signal-success-text: #6ee7b7;
+  --signal-success-border: #047857;
+
+  --signal-warning-bg: rgba(146, 64, 14, 0.25);
+  --signal-warning-text: #fde047;
+  --signal-warning-border: #b45309;
+
+  --signal-danger-bg: rgba(153, 27, 27, 0.25);
+  --signal-danger-text: #fca5a5;
+  --signal-danger-border: #b91c1c;
+
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
