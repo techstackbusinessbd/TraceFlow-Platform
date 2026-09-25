@@ -32,9 +32,12 @@
 - [ ] **1.6 সেন্ট্রালাইজড ডায়নামিক অপশনস ইঞ্জিন (ADR-10)**
   - [ ] `system_categories` ও `system_options` টেবিল মাইগ্রেশন
   - [ ] Redis ক্যাশ ভিত্তিক `OptionService` তৈরি
-- [ ] **1.5 অটো ডকুমেন্ট কোড জেনারেটর ইঞ্জিন (Invariant-11)**
-  - [ ] `document_sequences` টেবিল মাইগ্রেশন
-  - [ ] কনফিগারেবল প্রিফিক্স সহ `CodeGeneratorService` তৈরি
+- [x] **1.6 অটো ডকুমেন্ট কোড জেনারেটর ইঞ্জিন (ADR-09 & Invariant-11)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* তৈরি পোশাক কারখানায় হাজার হাজার ট্র্যাকিং কোড (Company Code, Plant Code, Order PO, Cutting Number, Bundle Barcode) তৈরি হয়। ইউজারকে ম্যানুয়ালি টাইপ করতে দিলে টাইপো ও ডুপ্লিকেট সৃষ্টি হয়। সেন্ট্রালাইজড কনফিগারেশন ড্রাইভেন অটো-নাম্বারিং ইঞ্জিন পেসিমিস্টিক রো লক (`lockForUpdate()`) সহকারে কাজ করায় একাধিক ফ্লোর টার্মিনাল একই মিলিসেকেন্ডে হিট করলেও জিরো ডুপ্লিকেট নিশ্চিত হয়।
+  - [x] `document_sequences` টেবিল মাইগ্রেশন (`id` UUID v7, `company_id`, `document_type`, `prefix`, `format_pattern`, `current_sequence`, `padding_length`)
+  - [x] `App\Domain\Organization\Models\DocumentSequence` এলোকুয়েন্ট মডেল তৈরি
+  - [x] `App\Domain\Organization\Services\CodeGeneratorService` তৈরি (পেসিমিস্টিক লক ও টোকেন সাবস্টিটিউশন সহ)
+  - [x] `CodeGeneratorTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন (100% Pass)
 
 ---
 
