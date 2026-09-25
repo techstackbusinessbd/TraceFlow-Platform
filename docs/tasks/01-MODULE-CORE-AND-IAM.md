@@ -62,15 +62,19 @@
 ---
 
 ### ৩. ফ্রন্টএন্ড কোর ও ইউআই সিস্টেম (React 19 + TypeScript + Vite)
-- [x] **3.1 সেন্ট্রালাইজড ডিজাইন সিস্টেম ও টোকেন (Zero Inline CSS - ADR-16, UI-UX-GUIDELINES)**
+- [x] **3.1 সেন্ট্রালাইজড ডিজাইন সিস্টেম ও টোকেন (Tailwind CSS v4 + Zero Inline CSS - ADR-16, UI-UX-GUIDELINES)**
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* গার্মেন্টস ফ্লোর ও ম্যানেজমেন্টে একটানা ৮-১০ ঘণ্টা কাজের সুবিধার জন্য আই-কমফোর্ট সফট স্লেট ক্যানভাস (`#f8fafc`), ব্র্যান্ডেড ব্লু অ্যাকসেন্ট এবং জিরো ইনলাইন সিএসএস নিশ্চিত করতে সেন্ট্রালাইজড ম্যানেজেবল ডিজাইন টোকেন ও কোর ইউআই অ্যাটমস প্রস্তুত করা হয়েছে।
-  - [x] সেন্ট্রালাইজড ডিজাইন টোকেন ও সিএসএস ভেরিয়েবলস (`frontend/src/styles/tokens.css` - Light & Ergonomic Dark Mode)
+  - [x] Tailwind CSS v4 ইন্টিগ্রেশন (`@tailwindcss/vite` প্লাগইন সহ)
+  - [x] সেন্ট্রালাইজড ডিজাইন টোকেন ও সিএসএস ভেরিয়েবলস (`frontend/src/styles/tokens.css` - `@theme` ডিরেক্টিভ সহ Light ও Ergonomic Dark Mode)
   - [x] গ্লোবাল রিসেট ও ট্যাবুলার নিউমারালস রুলস (`frontend/src/index.css`)
   - [x] কোর UI অ্যাটমস: `Button` (5 variants, 3 sizes, loading spinner), `Input` (error, helper, icons), `Card` (3 variants, 4 paddings), `Alert` (4 signal tints)
   - [x] TypeScript Strict Build & Oxlint ভেরিফিকেশন (0 errors, 0 warnings in `src`)
-- [ ] **3.2 অথেনটিকেশন ও স্টেট ম্যানেজমেন্ট**
-  - [ ] Zustand Auth Store (`authStore.ts`: টোকেন, কারেন্ট কোম্পানি, পারমিশনস)
-  - [ ] Axios/Fetch সেন্ট্রালাইজড এপিআই ক্লায়েন্ট উইথ ইন্টারসেপ্টরস
+- [x] **3.2 অথেনটিকেশন ও স্টেট ম্যানেজমেন্ট (Zustand + Axios Interceptors - SRS_LOGIN)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ব্যাকএন্ড লগইন এপিআই ও ডুয়াল ড্যাশবোর্ড ডিসিশন ইঞ্জিনের সাথে ফ্রন্টএন্ড কানেক্ট করার জন্য গ্লোবাল স্টেট ও সেন্ট্রালাইজড এপিআই ইন্টারসেপ্টর প্রস্তুত করা আবশ্যক।
+  - [x] `lucide-react`, `zustand`, `axios` প্যাকেজ ইনস্টল
+  - [x] `frontend/src/shared/stores/authStore.ts` তৈরি (টোকেন, ইউজার, কোম্পানি ও ডুয়াল ড্যাশবোর্ড টার্গেট পারসিস্টেন্স)
+  - [x] `frontend/src/shared/api/client.ts` এপিআই ক্লায়েন্ট তৈরি (অটো Bearer টোকেন ইনজেকশন ও 401 সেশন এক্সপায়ার ইন্টারসেপ্টর সহ)
+  - [x] TypeScript Strict Build ও Oxlint ভেরিফিকেশন (0 errors, 0 warnings)
 - [ ] **3.3 স্ক্রিন ও ড্যাশবোর্ড পেজসমূহ**
   - [ ] এন্টারপ্রাইজ লগইন স্ক্রিন (Eye-Comfort ও রিমেম্বার মি সহ)
   - [ ] ডুয়াল ড্যাশবোর্ড সুইচিং ভিউ (Superadmin Panel vs Factory Floor Hub)

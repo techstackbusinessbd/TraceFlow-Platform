@@ -1,5 +1,4 @@
 import React from 'react';
-import './Input.css';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -10,9 +9,9 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 /**
- * Enterprise Form Input Component (ADR-16 & SRS_LOGIN Section 2.3)
+ * Enterprise Form Input Component (ADR-16 & Tailwind CSS v4)
  *
- * Fully centralized styling backed by design tokens.
+ * Managed completely via centralized Tailwind theme utility classes with zero arbitrary inline CSS.
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   label,
@@ -28,25 +27,42 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   const inputId = id || (label ? `input-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
 
   return (
-    <div className={`tf-input-group ${error ? 'tf-input-group--error' : ''} ${disabled ? 'tf-input-group--disabled' : ''}`}>
+    <div className={`flex flex-col gap-1 w-full ${disabled ? 'opacity-60' : ''}`}>
       {label && (
-        <label htmlFor={inputId} className="tf-input-label">
+        <label htmlFor={inputId} className="text-xs font-medium text-text-secondary select-none">
           {label}
         </label>
       )}
-      <div className="tf-input-wrapper">
-        {leftIcon && <span className="tf-input-icon tf-input-icon--left">{leftIcon}</span>}
+      <div className="relative flex items-center w-full">
+        {leftIcon && (
+          <span className="absolute left-3 flex items-center text-text-muted pointer-events-none">
+            {leftIcon}
+          </span>
+        )}
         <input
           ref={ref}
           id={inputId}
           disabled={disabled}
-          className={`tf-input ${leftIcon ? 'tf-input--has-left-icon' : ''} ${rightIcon ? 'tf-input--has-right-icon' : ''} ${className}`}
+          className={`w-full h-10 px-3.5 bg-bg-surface border rounded-sm text-sm text-text-primary placeholder:text-text-muted transition-all duration-150 outline-none
+            ${leftIcon ? 'pl-9' : ''}
+            ${rightIcon ? 'pr-9' : ''}
+            ${error
+              ? 'border-signal-danger-text focus:ring-2 focus:ring-red-500/20'
+              : 'border-border-default focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20'
+            }
+            ${disabled ? 'bg-bg-surface-subtle cursor-not-allowed' : ''}
+            ${className}
+          `}
           {...props}
         />
-        {rightIcon && <span className="tf-input-icon tf-input-icon--right">{rightIcon}</span>}
+        {rightIcon && (
+          <span className="absolute right-3 flex items-center text-text-muted">
+            {rightIcon}
+          </span>
+        )}
       </div>
-      {error && <span className="tf-input-error">{error}</span>}
-      {!error && helperText && <span className="tf-input-helper">{helperText}</span>}
+      {error && <span className="text-xs font-medium text-signal-danger-text">{error}</span>}
+      {!error && helperText && <span className="text-xs text-text-muted">{helperText}</span>}
     </div>
   );
 });

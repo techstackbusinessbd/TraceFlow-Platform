@@ -1,5 +1,4 @@
 import React from 'react';
-import './Card.css';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'subtle' | 'outline';
@@ -7,9 +6,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Enterprise Card Component (ADR-16)
- *
- * Fully centralized styling backed by design tokens.
+ * Enterprise Card Component (ADR-16 & Tailwind CSS v4)
  */
 export const Card: React.FC<CardProps> = ({
   children,
@@ -18,8 +15,21 @@ export const Card: React.FC<CardProps> = ({
   className = '',
   ...props
 }) => {
+  const variantClasses = {
+    default: 'bg-bg-surface border border-border-subtle shadow-card',
+    subtle: 'bg-bg-surface-subtle border-transparent',
+    outline: 'bg-transparent border border-border-default',
+  }[variant];
+
+  const paddingClasses = {
+    none: 'p-0',
+    sm: 'p-2',
+    md: 'p-4',
+    lg: 'p-6',
+  }[padding];
+
   return (
-    <div className={`tf-card tf-card--${variant} tf-card--p-${padding} ${className}`} {...props}>
+    <div className={`rounded-md transition-all duration-150 ${variantClasses} ${paddingClasses} ${className}`} {...props}>
       {children}
     </div>
   );
