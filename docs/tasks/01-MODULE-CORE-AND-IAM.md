@@ -8,11 +8,11 @@
 - [x] **1.1 UUID v7 বেস আর্কিটেকচার (Invariant-01)**
   - [x] `App\Shared\Traits\HasUuidV7` ট্রেইট তৈরি
   - [x] ডিফল্ট `users` ও `sessions` টেবিলে UUID v7 মাইগ্রেশন
-- [ ] **1.2 কোম্পানি টেবিল ও মডেল (Tenant Base)**
+- [x] **1.2 কোম্পানি টেবিল ও মডেল (Tenant Base)**
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* এটি মাল্টি-টেন্যান্সি এবং আরএমজি ইআরপির কোর রুট। সিস্টেমে ইউজারদের নির্দিষ্ট কোম্পানির অধীনে রোল ও পারমিশন দিতে হলে ডাটাবেজে সবার আগে একটি ভ্যালিড `companies` টেবিল থাকা কারিগরি পূর্বশর্ত।
-  - [ ] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `business_type`, `currency`, `is_active`)
-  - [ ] `App\Domain\Organization\Models\Company` মডেল তৈরি ও রিলেশনশিপ
-  - [ ] `CompanyTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
+  - [x] `companies` টেবিল মাইগ্রেশন (`id` UUID v7, `company_name`, `company_code`, `business_type`, `currency`, `is_active`)
+  - [x] `App\Domain\Organization\Models\Company` মডেল তৈরি ও রিলেশনশিপ
+  - [x] `CompanyTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
 - [ ] **1.3 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড)**
   - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল
   - [ ] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
