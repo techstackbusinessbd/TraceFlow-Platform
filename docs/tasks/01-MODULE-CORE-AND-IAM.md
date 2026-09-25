@@ -17,14 +17,19 @@
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* TraceFlow-Platform একটি মাল্টি-টেন্যান্ট SaaS ও Appliance প্ল্যাটফর্ম। সেন্ট্রাল হোস্ট ডাটাবেজে প্রতিটি ক্লায়েন্টের ডেডিকেটেড ডাটাবেজ ইনফো (`db_name`, `db_host`, `db_user`, `db_password`), সাবডোমেন (`{slug}.traceflow.app`), কাস্টম ডোমেন এবং ডেপ্লয়মেন্ট টাইপ (`CLOUD_SAAS` বনাম `ON_PREMISES_APPLIANCE`) সংরক্ষিত থাকতে হবে, যা ক্লায়েন্ট অনবোর্ডিং ও ডাইনামিক ডিবি রাউটিংয়ের মূল ভিত্তি।
   - [x] `tenants` টেবিল মাইগ্রেশন (`id` UUID v7, `client_name`, `client_slug`, `subdomain`, `custom_domain`, `deployment_type`, `db_host`, `db_port`, `db_name`, `db_username`, `db_password`, `server_ip`, `hardware_fingerprint`, `is_active`)
   - [x] `App\Domain\Tenant\Models\Tenant` মডেল তৈরি ও ফিল্ড এনক্রিপশন
-  - [x] `TenantProvisioningTest` ও `TenantUserRelationshipTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন
-- [ ] **1.4 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
+- [x] **1.4 প্ল্যাটফর্ম ওনার ও সিস্টেম বুটস্ট্র্যাপ ইঞ্জিন (ADR-11)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* [ADR-11] অনুযায়ী রুট প্ল্যাটফর্ম ওনার কোম্পানি (`ROOT-PLATFORM`, `PLATFORM_HOST`) এবং ৭টি অভ্যন্তরীণ ইঞ্জিনিয়ারিং টিম অ্যাকাউন্ট (`superadmin`, `backend.team`, `frontend.team`, `database.team`, `devops.team`, `qa.team`, `ba.team`) সাধারণ কোনো সিডারে রাখা যাবে না। এটি একটি ডেডিকেটেড ইডেমপোটেন্ট সার্ভিস এবং আর্টিসান কমান্ডের মাধ্যমে নিশ্চিত হতে হবে, যা যে কোনো এনভায়রনমেন্টে শতবার রান করলেও ডুপ্লিকেট হবে না এবং ডেমো পার্জে সুরক্ষিত থাকবে।
+  - [x] `App\Domain\Organization\Services\PlatformBootstrapService` তৈরি (ইডেমপোটেন্ট রুট ও ৭ টিম অ্যাকাউন্ট তৈরি)
+  - [x] `traceflow:bootstrap-platform` আর্টিসান কমান্ড তৈরি
+  - [x] `PlatformBootstrapTest` ইউনিট টেস্ট তৈরি ও ইডেমপোটেন্সি ভেরিফিকেশন (100% Pass)
+- [ ] **1.5 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ডাটাবেজে ইউজার এবং কোম্পানি স্ট্রাকচার প্রস্তুত হওয়ার পর কোম্পানিভেদে সুনির্দিষ্ট রোল ও পারমিশন প্রয়োগের জন্য Spatie RBAC কনফিগার করা আবশ্যক।
   - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল
   - [ ] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
   - [ ] Spatie পারমিশন টেবিলসমূহ UUID v7 ফরম্যাটে মাইগ্রেট করা
+  - [ ] সুপারঅ্যাডমিন গেট বাইপাস (`Gate::before`) পলিসি কনফিগারেশন (ADR-11 Decision 02)
   - [ ] পারমিশন সিঙ্ক কমান্ড (`traceflow:sync-permissions`) তৈরি
-- [ ] **1.4 সেন্ট্রালাইজড ডায়নামিক অপশনস ইঞ্জিন (ADR-10)**
+- [ ] **1.6 সেন্ট্রালাইজড ডায়নামিক অপশনস ইঞ্জিন (ADR-10)**
   - [ ] `system_categories` ও `system_options` টেবিল মাইগ্রেশন
   - [ ] Redis ক্যাশ ভিত্তিক `OptionService` তৈরি
 - [ ] **1.5 অটো ডকুমেন্ট কোড জেনারেটর ইঞ্জিন (Invariant-11)**
