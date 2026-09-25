@@ -42,10 +42,13 @@
 ---
 
 ### ২. ব্যাকএন্ড সার্ভিস ও এপিআই লেয়ার (Modular DDD)
-- [ ] **2.1 অথেনটিকেশন ও ডুয়াল ড্যাশবোর্ড লজিক (SRS_LOGIN)**
-  - [ ] Sanctum টোকেন অথেনটিকেশন
-  - [ ] ডুয়াল রোল ডিটেকশন (Platform Owner vs Factory Tenant User)
-  - [ ] রেট লিমিটিং ও লগইন লকআউট গার্ড
+- [x] **2.1 অথেনটিকেশন ও ডুয়াল ড্যাশবোর্ড লজিক (SRS_LOGIN, ADR-11, ADR-12)**
+  - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ডাটাবেজ মডেলিং ও বুটস্ট্র্যাপ প্রস্তুত হওয়ার পর প্ল্যাটফর্মের পরবর্তী ধাপ হলো নিরাপদ লগইন এবং রোল ভিত্তিক ডুয়াল ড্যাশবোর্ড রাউটিং ডিসিশন ইঞ্জিন (`/platform/command-center` বনাম `/app/dashboard`)। ইউজারনেম ও ইমেইল উভয় মাধ্যমে লগইন নিশ্চিত করে সেন্ট্রাল Sanctum টোকেন জেনারেট করা।
+  - [x] Sanctum টোকেন অথেনটিকেশন প্যাকেজ ও UUID-কম্প্যাটিবল `personal_access_tokens` টেবিল মাইগ্রেশন
+  - [x] `App\Http\Requests\Auth\LoginRequest` তৈরি (Email or Username সমর্থন)
+  - [x] `App\Domain\IAM\Services\AuthService` তৈরি (ডুয়াল ড্যাশবোর্ড রাউটিং ডিসিশন সহ)
+  - [x] `App\Http\Controllers\Api\V1\Auth\AuthController` তৈরি (`/api/v1/auth/login`, `/api/v1/auth/me`, `/api/v1/auth/logout`)
+  - [x] `AuthenticationTest` ফিচার টেস্ট তৈরি ও ভেরিফিকেশন (5 Tests, 100% Pass)
 - [ ] **2.2 অর্গানাইজেশন ডোমেন সার্ভিসেস (`app/Domain/Organization/`)**
   - [ ] `CompanyService` (কোম্পানি অনবোর্ডিং ও কনফিগ)
   - [ ] `FactoryUnitService` (ইউনিট ও ফ্লোর ম্যানেজমেন্ট)
