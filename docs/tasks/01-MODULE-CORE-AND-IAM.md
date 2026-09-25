@@ -5,9 +5,9 @@
 ---
 
 ### ১. ব্যাকএন্ড ডাটাবেজ ও মডেলিং (Laravel 13 + PostgreSQL 16)
-- [ ] **1.1 UUID v7 বেস আর্কিটেকচার (Invariant-01)**
-  - [ ] `App\Shared\Traits\HasUuidV7` ট্রেইট তৈরি
-  - [ ] ডিফল্ট `users` ও `sessions` টেবিলে UUID v7 মাইগ্রেশন
+- [x] **1.1 UUID v7 বেস আর্কিটেকচার (Invariant-01)**
+  - [x] `App\Shared\Traits\HasUuidV7` ট্রেইট তৈরি
+  - [x] ডিফল্ট `users` ও `sessions` টেবিলে UUID v7 মাইগ্রেশন
 - [ ] **1.2 মাল্টি-টেন্যান্ট ও কোম্পানি স্ট্রাকচার (ADR-08, ADR-11)**
   - [ ] `companies` (Tenant) টেবিল মাইগ্রেশন ও মডেল
   - [ ] `factory_units` (কারখানা ইউনিট) টেবিল মাইগ্রেশন ও মডেল
