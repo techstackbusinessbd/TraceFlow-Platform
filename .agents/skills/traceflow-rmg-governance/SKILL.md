@@ -42,6 +42,10 @@ Before generating or refactoring code:
    - The `ERP-AI-DEVELOPMENT-TEAM/` directory houses the foundational Base Documents for the entire platform.
    - When creating, updating, or reviewing any SRS or SOP under `docs/modules/`, requirements must be strictly derived from these base documents (`UI-UX-GUIDELINES.md`, `ENTERPRISE-UI-COMPONENT-SYSTEM.md`, `ARCHITECTURAL-DECISION-RECORDS.md`, `DATABASE-ARCHITECTURE-AND-SCHEMA.md`).
    - Never introduce conflicting design rules, rogue color themes, or diverging data schemas in any module SRS.
+10. **Single Task Isolation & Minimal Migration Scope Protocol:**
+    - Never present or execute migrations, models, or code for multiple future sub-tasks all at once.
+    - Focus strictly and exclusively on the active step/feature currently being developed.
+    - Each development step must only create the minimal database tables, controllers, and services strictly required for that specific step. Extra tables or speculative future schemas must NOT be bundled together.
 
 ---
 
