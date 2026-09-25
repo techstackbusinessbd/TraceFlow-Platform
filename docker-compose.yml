@@ -1,0 +1,115 @@
+services:
+  # 1. Reverse Proxy (Nginx)
+  proxy:
+    image: nginx:alpine
+    container_name: tfrmg_local_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/local/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./backend:/var/www/html:delegated
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - tfrmg_local_net
+
+  # 2. Backend (PHP 8.3 FPM + Laravel 13)
+  backend:
+    build:
+      context: .
+      dockerfile: docker/local/php/Dockerfile.dev
+    container_name: tfrmg_local_backend
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./backend:/var/www/html:delegated
+    environment:
+      APP_NAME: "TraceFlow-Platform"
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: traceflow_rmg_dev
+      DB_USERNAME: tf_user
+      DB_PASSWORD: tf_password
+      REDIS_CLIENT: phpredis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - tfrmg_local_net
+
+  # 3. Frontend (Node.js 20 + React 19 Vite)
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/local/node/Dockerfile.dev
+    container_name: tfrmg_local_frontend
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app:delegated
+      - /app/node_modules
+    environment:
+      - VITE_API_BASE_URL=http://localhost/api/v1
+    networks:
+      - tfrmg_local_net
+
+  # 4. Database (PostgreSQL 16)
+  postgres:
+    image: postgres:16-alpine
+    container_name: tfrmg_local_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: traceflow_rmg_dev
+      POSTGRES_USER: tf_user
+      POSTGRES_PASSWORD: tf_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tf_user -d traceflow_rmg_dev"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - tfrmg_local_net
+
+  # 5. In-Memory Cache & Queues (Redis 7)
+  redis:
+    image: redis:7-alpine
+    container_name: tfrmg_local_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - local_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - tfrmg_local_net
+
+networks:
+  tfrmg_local_net:
+    driver: bridge
+
+volumes:
+  local_pgdata:
+  local_redisdata:
