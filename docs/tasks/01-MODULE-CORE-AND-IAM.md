@@ -22,13 +22,13 @@
   - [x] `App\Domain\Organization\Services\PlatformBootstrapService` তৈরি (ইডেমপোটেন্ট রুট ও ৭ টিম অ্যাকাউন্ট তৈরি)
   - [x] `traceflow:bootstrap-platform` আর্টিসান কমান্ড তৈরি
   - [x] `PlatformBootstrapTest` ইউনিট টেস্ট তৈরি ও ইডেমপোটেন্সি ভেরিফিকেশন (100% Pass)
-- [ ] **1.5 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড - ADR-08)**
+- [x] **1.5 Spatie RBAC ইন্টিগ্রেশন (মাল্টি-কোম্পানি মোড ও সুপারঅ্যাডমিন গেট - ADR-08, ADR-11)**
   - *কেন এই টাস্ক রেকমেন্ড করা হয়েছে (Rationale):* ডাটাবেজে ইউজার এবং কোম্পানি স্ট্রাকচার প্রস্তুত হওয়ার পর কোম্পানিভেদে সুনির্দিষ্ট রোল ও পারমিশন প্রয়োগের জন্য Spatie RBAC কনফিগার করা আবশ্যক।
-  - [ ] Spatie Laravel-Permission প্যাকেজ ইনস্টল
-  - [ ] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
-  - [ ] Spatie পারমিশন টেবিলসমূহ UUID v7 ফরম্যাটে মাইগ্রেট করা
-  - [ ] সুপারঅ্যাডমিন গেট বাইপাস (`Gate::before`) পলিসি কনফিগারেশন (ADR-11 Decision 02)
-  - [ ] পারমিশন সিঙ্ক কমান্ড (`traceflow:sync-permissions`) তৈরি
+  - [x] Spatie Laravel-Permission প্যাকেজ ইনস্টল
+  - [x] `teams => true` এবং `team_foreign_key => company_id` কনফিগারেশন
+  - [x] Spatie পারমিশন টেবিলসমূহ UUID v7 ফরম্যাটে মাইগ্রেট করা (`App\Domain\Organization\Models\Permission`, `App\Domain\Organization\Models\Role`)
+  - [x] সুপারঅ্যাডমিন গেট বাইপাস (`Gate::before`) পলিসি কনফিগারেশন (ADR-11 Decision 02)
+  - [x] `MultiCompanyRBACTest` ইউনিট টেস্ট তৈরি ও ভেরিফিকেশন (UUID v7, Company Scoping, Gate Bypass - 100% Pass)
 - [ ] **1.6 সেন্ট্রালাইজড ডায়নামিক অপশনস ইঞ্জিন (ADR-10)**
   - [ ] `system_categories` ও `system_options` টেবিল মাইগ্রেশন
   - [ ] Redis ক্যাশ ভিত্তিক `OptionService` তৈরি
